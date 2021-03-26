@@ -1,7 +1,7 @@
 # Portfolio-1
 Homework due 2021-3-23
 
-![Site](./assets/screenshot.png)
+![Site](./Assets/screenshot.png)
 
 ## Technologies Used
 - HTML - Creates text and differents elements 
