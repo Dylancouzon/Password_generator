@@ -30,7 +30,6 @@ function checkPassword(password, allChars, PassLength, charString){
       // Loop that check if any of the characters is included
       for(i=0; i<optionSelected.length; i++){
         if(password.includes(optionSelected[i])){
-          console.log("test");
           checkResult.push(true);
           break;
         }
