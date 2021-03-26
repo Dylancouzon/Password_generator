@@ -41,7 +41,6 @@ function checkPassword(password, allChars, PassLength, charString){
       writePassword(password);
     }else{
       generatePassword(PassLength, charString, allChars);
-      console.log("rerun password");
     }
   }
 
