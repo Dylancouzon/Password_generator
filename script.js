@@ -1,10 +1,15 @@
-// Declaring all the possible characters
+// Declaring all the possible characters in a string and in an array
 var length = [8, 128];
-lowercase = 'abcdefghijklmnopqrstuvwxyz';
-uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-numeric = '0123456789';
-special = "#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+var lowercase = 'abcdefghijklmnopqrstuvwxyz';
+var Arrlowercase = lowercase.split("");
+var uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+var Arruppercase = uppercase.split("");
+var numeric = '0123456789';
+var Arrnumeric = numeric.split("");
+var special = "#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+var Arrspecial = special.split("");
 var MixedOptions = [lowercase, uppercase, numeric, special]
+var optionNames = ["Arrlowercase", "Arruppercase", "Arrnumeric", "Arrspecial"];
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
@@ -15,17 +20,45 @@ function writePassword(password) {
   passwordText.value = password;
 }
 
+//Check if the password contains every selected type of character. If not, rerun the generatePassword function
+function checkPassword(password, allChars, PassLength, charString){
+  var checkResult = [];
+  //Check is the type of character is selected, if yes, runs a loops that determines if any of the selected character has been included in the password, if not, generates a new password
+  allChars.forEach(function(option, index){
+    var optionSelected = eval(optionNames[index]);
+    if(option){
+      // Loop that check if any of the characters is included
+      for(i=0; i<optionSelected.length; i++){
+        if(password.includes(optionSelected[i])){
+          console.log("test");
+          checkResult.push(true);
+          break;
+        }
+      };
+    }else{checkResult.push(false);}
+  });
+   //Check if the password contains all the characters requested
+    if(JSON.stringify(allChars) == JSON.stringify(checkResult)){
+      writePassword(password);
+    }else{
+      generatePassword(PassLength, charString, allChars);
+      console.log("rerun password");
+    }
+  }
+
+
 //Generating password comment, the 2 arguments are the password length and a string of the characters we want to use
-function generatePassword(length, allcharacters) {
+function generatePassword(PassLength, allcharacters, allChars) {
   var finalPass = '';
+  var Keepallcharacters = allcharacters;
   // Creates a random number between 1 and allcharacters.length, then select the number with that index inside the characters string
   // Repeats for each character we need 
-  for (i=1;i<=length;i++) {
+  for (i=1;i<=PassLength;i++) {
     var c = Math.floor(Math.random()*allcharacters.length + 1);
     finalPass += allcharacters.charAt(c)
   }
-   //Executes the writePassword command
-  writePassword(finalPass);
+   //Executes the checkPassword command
+   checkPassword(finalPass, allChars, PassLength, Keepallcharacters);
 }
 
 function getInfos() {
@@ -49,7 +82,7 @@ function getInfos() {
           }
         });
         //Send the string of characters to the generatePassword function
-        generatePassword(PassLength, charString);
+        generatePassword(PassLength, charString, allChars);
     // Error
     }else{ alert("Please Select at least one type of Characters.");}
   // Error  
