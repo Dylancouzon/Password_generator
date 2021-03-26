@@ -1,9 +1,9 @@
-// Declaring all the possible parameters
+// Declaring all the possible characters
 var length = [8, 128];
-lowercase = 'abcdefghijklmnopqrstuvwxyz'.split('');
-uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-numeric = '0123456789'.split('');
-special = "#$%&'()*+,-./:;<=>?@[\]^_`{|}~".split('');
+lowercase = 'abcdefghijklmnopqrstuvwxyz';
+uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+numeric = '0123456789';
+special = "#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
 var MixedOptions = [lowercase, uppercase, numeric, special]
 
 // Assignment Code
@@ -15,15 +15,17 @@ function writePassword(password) {
   passwordText.value = password;
 }
 
+//Generating password comment, the 2 arguments are the password length and a string of the characters we want to use
 function generatePassword(length, allcharacters) {
   var finalPass = '';
+  // Creates a random number between 1 and allcharacters.length, then select the number with that index inside the characters string
+  // Repeats for each character we need 
   for (i=1;i<=length;i++) {
     var c = Math.floor(Math.random()*allcharacters.length + 1);
     finalPass += allcharacters.charAt(c)
   }
-  console.log(finalPass);
+   //Executes the writePassword command
   writePassword(finalPass);
-
 }
 
 function getInfos() {
@@ -43,7 +45,7 @@ function getInfos() {
         // If the special char is true, it will be added to a string
         allChars.forEach(function(option, index){
           if(option){
-            charString += MixedOptions[index].toString();
+            charString += MixedOptions[index];
           }
         });
         //Send the string of characters to the generatePassword function
@@ -55,6 +57,3 @@ function getInfos() {
 }
 // Add event listener to generate button
 generateBtn.addEventListener("click", getInfos);
-
-
-// use concat to mix together 
